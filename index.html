@@ -10,12 +10,12 @@
             font-family: Arial, sans-serif;
             margin: 40px;
         }
-        /* Hide canvas initially */
-        canvas {
-            margin-top: 20px;
+        /* Hide canvas and HubSpot form initially */
+        #myChart {
             display: none; /* Hidden by default */
         }
         #hubspotForm {
+            display: none; /* Hidden by default */
             margin-top: 20px;
         }
     </style>
@@ -44,13 +44,10 @@
         <input type="number" id="payPerMonth" value="300" />
     </div>
 
-    <button onclick="updateGraph()">Show graph</button>
+    <button onclick="showGraphAndForm()">Show graph</button>
 
     <!-- Canvas for Graph -->
     <canvas id="myChart" width="400" height="200"></canvas>
-
-    <!-- CTA to launch HubSpot form -->
-    <button onclick="loadHubSpotForm()">Contact Us</button>
 
     <!-- HubSpot Form Placeholder -->
     <div id="hubspotForm"></div>
@@ -58,31 +55,31 @@
     <script src="script.js"></script>
     <script src="https://js.hsforms.net/forms/embed/v2.js"></script>
     <script>
-        // Function to load HubSpot form dynamically
-        function loadHubSpotForm() {
+        // Function to show both the graph and the HubSpot form
+        function showGraphAndForm() {
+            // Show the graph and HubSpot form when the button is clicked
+            document.getElementById('myChart').style.display = 'block';
+            document.getElementById('hubspotForm').style.display = 'block';
+
+            // Load HubSpot form dynamically
             hbspt.forms.create({
                 region: "na1",
                 portalId: "47803942",
                 formId: "4371e40c-0ddc-41e1-89a2-682ba3e89294",
                 target: "#hubspotForm"
             });
-        }
 
-        // Function to update the graph and show the canvas
-        function updateGraph() {
+            // Get input values
             var numLoans = document.getElementById('numLoans').value;
             var avgInterest = document.getElementById('avgInterest').value;
             var minPayment = document.getElementById('minPayment').value;
             var payPerMonth = document.getElementById('payPerMonth').value;
 
-            // Show the canvas when the graph is generated
-            document.getElementById('myChart').style.display = 'block';
-
             // Get the canvas context for Chart.js
             var ctx = document.getElementById('myChart').getContext('2d');
 
-            // Initialize a simple chart (replace previous chart if needed)
-            var myChart = new Chart(ctx, {
+            // Initialize or update the chart
+            new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['# of Loans', 'Avg Interest', 'Min Payment', 'Planned Payment'],
