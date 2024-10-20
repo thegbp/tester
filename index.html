@@ -10,8 +10,10 @@
             font-family: Arial, sans-serif;
             margin: 40px;
         }
+        /* Hide canvas initially */
         canvas {
             margin-top: 20px;
+            display: none; /* Hidden by default */
         }
         #hubspotForm {
             margin-top: 20px;
@@ -63,6 +65,52 @@
                 portalId: "47803942",
                 formId: "4371e40c-0ddc-41e1-89a2-682ba3e89294",
                 target: "#hubspotForm"
+            });
+        }
+
+        // Function to update the graph and show the canvas
+        function updateGraph() {
+            var numLoans = document.getElementById('numLoans').value;
+            var avgInterest = document.getElementById('avgInterest').value;
+            var minPayment = document.getElementById('minPayment').value;
+            var payPerMonth = document.getElementById('payPerMonth').value;
+
+            // Show the canvas when the graph is generated
+            document.getElementById('myChart').style.display = 'block';
+
+            // Get the canvas context for Chart.js
+            var ctx = document.getElementById('myChart').getContext('2d');
+
+            // Initialize a simple chart (replace previous chart if needed)
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['# of Loans', 'Avg Interest', 'Min Payment', 'Planned Payment'],
+                    datasets: [{
+                        label: 'Loan Data',
+                        data: [numLoans, avgInterest, minPayment, payPerMonth],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
             });
         }
     </script>
