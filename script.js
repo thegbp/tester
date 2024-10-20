@@ -5,12 +5,22 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar', // You can change this to 'line', 'pie', etc.
     data: {
-        labels: ['Value'], // X-axis label
+        labels: ['# of Loans', 'Avg Interest', 'Min Payment', 'Planned Payment'], // X-axis labels
         datasets: [{
-            label: '# of Votes',
-            data: [10], // Initial value
-            backgroundColor: ['rgba(75, 192, 192, 0.2)'],
-            borderColor: ['rgba(75, 192, 192, 1)'],
+            label: 'Loan Data',
+            data: [5, 5, 200, 300], // Initial values
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(54, 162, 235, 1)'
+            ],
             borderWidth: 1
         }]
     },
@@ -25,7 +35,17 @@ var myChart = new Chart(ctx, {
 
 // Function to update the chart based on user input
 function updateGraph() {
-    var inputValue = document.getElementById('inputValue').value;
-    myChart.data.datasets[0].data[0] = inputValue;
+    var numLoans = document.getElementById('numLoans').value;
+    var avgInterest = document.getElementById('avgInterest').value;
+    var minPayment = document.getElementById('minPayment').value;
+    var payPerMonth = document.getElementById('payPerMonth').value;
+
+    // Update chart data with new values from inputs
+    myChart.data.datasets[0].data = [numLoans, avgInterest, minPayment, payPerMonth];
     myChart.update(); // Update the chart
+}
+
+// Function to show the HubSpot form
+function showHubSpotForm() {
+    document.getElementById('hubspotForm').style.display = 'block';
 }
