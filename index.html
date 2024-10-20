@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graphing Module Test</title>
+    <title>Student Loan Graph</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
@@ -13,19 +13,59 @@
         canvas {
             margin-top: 20px;
         }
+        #hubspotForm {
+            display: none;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>Graphing Module</h1>
-    
+    <h1>Student Loan Graphing Tool</h1>
+
     <!-- Input Form -->
-    <label for="inputValue">Enter a Value:</label>
-    <input type="number" id="inputValue" value="10" />
-    <button onclick="updateGraph()">Update Graph</button>
+    <div>
+        <label for="numLoans"># of Student Loans:</label>
+        <input type="number" id="numLoans" value="5" />
+    </div>
+
+    <div>
+        <label for="avgInterest">Avg Interest of Loans (%):</label>
+        <input type="number" id="avgInterest" value="5" step="0.01" />
+    </div>
+
+    <div>
+        <label for="minPayment">Minimum Combined Payment ($):</label>
+        <input type="number" id="minPayment" value="200" />
+    </div>
+
+    <div>
+        <label for="payPerMonth">Amount You Plan to Pay Per Month ($):</label>
+        <input type="number" id="payPerMonth" value="300" />
+    </div>
+
+    <button onclick="updateGraph()">Show graph</button>
 
     <!-- Canvas for Graph -->
     <canvas id="myChart" width="400" height="200"></canvas>
 
+    <!-- CTA to launch HubSpot form -->
+    <button onclick="showHubSpotForm()">Contact Us</button>
+
+    <!-- HubSpot Form Placeholder -->
+    <div id="hubspotForm">
+        <h2>HubSpot Form</h2>
+        <!-- HubSpot Form will be embedded here -->
+        <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/embed/v2.js"></script>
+        <script>
+            hbspt.forms.create({
+                region: "na1",
+                portalId: "your-hubspot-portal-id",
+                formId: "your-hubspot-form-id"
+            });
+        </script>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
+
