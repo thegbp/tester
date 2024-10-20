@@ -14,7 +14,6 @@
             margin-top: 20px;
         }
         #hubspotForm {
-            display: none;
             margin-top: 20px;
         }
     </style>
@@ -49,21 +48,23 @@
     <canvas id="myChart" width="400" height="200"></canvas>
 
     <!-- CTA to launch HubSpot form -->
-    <button onclick="showHubSpotForm()">Contact Us</button>
+    <button onclick="loadHubSpotForm()">Contact Us</button>
 
     <!-- HubSpot Form Placeholder -->
-    <div id="hubspotForm">
-        <h2>HubSpot Form</h2>
-        <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/embed/v2.js"></script>
-        <script>
+    <div id="hubspotForm"></div>
+
+    <script src="script.js"></script>
+    <script src="https://js.hsforms.net/forms/embed/v2.js"></script>
+    <script>
+        // Function to load HubSpot form dynamically
+        function loadHubSpotForm() {
             hbspt.forms.create({
                 region: "na1",
                 portalId: "47803942",
-                formId: "4371e40c-0ddc-41e1-89a2-682ba3e89294"
+                formId: "4371e40c-0ddc-41e1-89a2-682ba3e89294",
+                target: "#hubspotForm"
             });
-        </script>
-    </div>
-
-    <script src="script.js"></script>
+        }
+    </script>
 </body>
 </html>
